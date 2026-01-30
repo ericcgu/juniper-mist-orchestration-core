@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import get_swagger_ui_html
 
@@ -7,11 +7,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+status_router = APIRouter(tags=["Status"])
+
+@app.get("/status", tags=["Status"], summary="Get the status of the service")
+async def status():
+    return {"status": "ok"}
+
+app.include_router(status_router)
 
 @app.get("/", include_in_schema=False)
 def redirect_to_docs():
     return RedirectResponse(url="/docs")
-
-@app.get("/status")
-async def status():
-    return {"status": "ok"}
