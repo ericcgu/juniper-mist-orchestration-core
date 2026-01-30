@@ -1,2 +1,5 @@
 fastapi==0.100.0
 hypercorn==0.14.4
+httpx==0.28.1
+mistapi>=0.45.0
+pyyaml==6.0.1

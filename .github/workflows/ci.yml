@@ -1,13 +1,10 @@
-# GitHub Actions workflow for FastAPI project with pytest and uvicorn
 name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   test:
@@ -15,17 +12,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: 3.14
+        python-version: "3.12"
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        uv install -r requirements.txt
+        uv pip install -r requirements.txt
+        uv pip install pytest # Ensure pytest is in the uv managed environment
 
     - name: Run tests
-      run: pytest tests/
+      # We use 'uv run' to ensure it uses the local environment we just built
+      run: uv run pytest tests/
