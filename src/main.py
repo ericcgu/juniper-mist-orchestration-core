@@ -1,6 +1,7 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import get_swagger_ui_html
+from src.config import Settings, get_settings
 
 app = FastAPI(
     title="Juniper Mist - Multi Site Provisioning Service API",
@@ -9,9 +10,13 @@ app = FastAPI(
 
 status_router = APIRouter(tags=["status"])
 
-@app.get("/status", tags=["status"], summary="Get the status of the service")
+@app.get("/status", tags=["Status"], summary="Get the status of the service")
 async def status():
     return {"status": "ok"}
+
+@app.get("/settings", tags=["Settings"], summary="Get the test variable from .env")
+async def get_test_variable(settings: Settings = Depends(get_settings)):
+    return {"test_variable": settings.test_variable}
 
 app.include_router(status_router)
 

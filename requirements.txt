@@ -1,5 +1,6 @@
 fastapi==0.100.0
 hypercorn==0.14.4
 httpx==0.27.2
-mistapi>=0.45.0
+mistapi==0.55.8
+pydantic-settings==2.1.0
 pyyaml==6.0.1
