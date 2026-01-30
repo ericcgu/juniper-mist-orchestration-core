@@ -7,9 +7,9 @@ app = FastAPI(
     version="1.0.0"
 )
 
-status_router = APIRouter(tags=["Status"])
+status_router = APIRouter(tags=["status"])
 
-@app.get("/status", tags=["Status"], summary="Get the status of the service")
+@app.get("/status", tags=["status"], summary="Get the status of the service")
 async def status():
     return {"status": "ok"}
 
