@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter, Depends
 from fastapi.responses import RedirectResponse
-from config import Settings, get_settings
+from .config import Settings, get_settings
 
 app = FastAPI(
     title="Juniper Mist - Multi Site Provisioning Service API",
