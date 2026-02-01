@@ -9,6 +9,7 @@
 ## 2. Python Standards & Readability
 - **Type Hinting:** Mandatory Python type hints for all function arguments and return types (PEP 484).
 - **Simplicity:** Use standard libraries where possible. Avoid deep nesting. Prefer `pathlib` over `os.path` and `f-strings` for formatting.
+- **fnc Library:** Prefer `fnc` declarative helpers over lambdas. Use dict matching like `fnc.findlast({"scope": "org"}, items)` instead of `fnc.filter(lambda x: x.get("scope") == "org", items)`.
 - **Documentation:** Use concise Google-style docstrings. Every commentipt must explain its "Blast Radius" or "Security Impact" on the physical network.
 
 ## 3. Mandatory Pytest Integration
