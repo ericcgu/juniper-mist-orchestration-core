@@ -28,4 +28,8 @@ jobs:
       run: uv run ruff check .
 
     - name: Run tests
+      env:
+        ENVIRONMENT_NAME: ${{ vars.ENVIRONMENT_NAME }}
+        MIST_API_KEY: ${{ secrets.MIST_API_KEY }}
+        REDIS_URL: ${{ secrets.REDIS_URL }}
       run: uv run pytest tests/
