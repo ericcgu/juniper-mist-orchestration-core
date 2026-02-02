@@ -22,8 +22,10 @@ jobs:
     - name: Install dependencies
       run: |
         uv pip install -r requirements.txt
-        uv pip install pytest # Ensure pytest is in the uv managed environment
+        uv pip install pytest ruff
+
+    - name: Lint with ruff
+      run: uv run ruff check .
 
     - name: Run tests
-      # We use 'uv run' to ensure it uses the local environment we just built
       run: uv run pytest tests/

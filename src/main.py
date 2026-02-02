@@ -1,26 +1,53 @@
 from fastapi import FastAPI, APIRouter, Depends
 from fastapi.responses import RedirectResponse
 from src.config import Settings, get_settings
-from src.routers.day0_identity_topology import org, context
+from src.routers.day0_identity_and_topology import org, nms, sites
+
+# OpenAPI tag definitions for Swagger UI grouping.
+tags_metadata = [
+    {
+        "name": "day 0 - organization",
+        "description": "Control plane identity and reachability. Validates API credentials and resolves organization context.",
+    },
+    {
+        "name": "day 0 - nms",
+        "description": "Network management system configuration. Stores device MACs, VLANs, and switch management details.",
+    },
+    {
+        "name": "day 0 - site provisioning",
+        "description": "Orchestrates the lifecycle (CRUD) of physical site objects and site variables within the Mist org.",
+    },
+    {
+        "name": "system",
+        "description": "Service health and configuration endpoints.",
+    },
+]
 
 app = FastAPI(
-    title="Juniper Mist - Multi Site Provisioning Service API",
-    version="1.0.0"
+    title="Juniper Mist - Multi-Site Provisioning Service",
+    description="Automates network infrastructure provisioning using the Juniper Mist Cloud API.",
+    version="1.0.0",
+    openapi_tags=tags_metadata,
 )
 
-status_router = APIRouter(tags=["status"])
+status_router = APIRouter(tags=["system"])
 
-@app.get("/status", tags=["Status"], summary="Get the status of the service")
+
+@app.get("/status", tags=["system"], summary="Check service health.")
 async def status():
+    """Returns the current health status of the provisioning service."""
     return {"status": "ok"}
 
-@app.get("/settings", tags=["Settings"], summary="Get the test variable from .env")
+
+@app.get("/settings", tags=["system"], summary="Retrieve environment configuration.")
 async def get_test_variable(settings: Settings = Depends(get_settings)):
+    """Returns the test variable from the environment configuration."""
     return {"test_variable": settings.test_variable}
 
 app.include_router(status_router)
 app.include_router(org.router)
-app.include_router(context.router)
+app.include_router(nms.router)
+app.include_router(sites.router)
 
 @app.get("/", include_in_schema=False)
 def redirect_to_docs():

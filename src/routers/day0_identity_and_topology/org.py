@@ -15,7 +15,7 @@ from src.services.mist_engine import MistEngine
 from src.services.redis import get_redis_client
 
 
-router = APIRouter(prefix="/org", tags=["Day 0 - Org"])
+router = APIRouter(prefix="/org", tags=["day 0 - organization"])
 
 
 # =============================================================================
@@ -38,20 +38,19 @@ class SelfRequest(BaseModel):
 # Endpoints
 # =============================================================================
 
-@router.post("/self", summary="Get authenticated user/org info")
+@router.post("/self", summary="Validate API credentials and resolve organization context.")
 async def get_self(
     request: SelfRequest = SelfRequest()
 ):
     """
-    **Get Self Information**
-    
-    Retrieves information about the authenticated user and organization
-    by calling the Mist API `/api/v1/self` endpoint.
-    
-    If org_id is not provided, it will be extracted from the last org-scoped
-    privilege in the API response.
-    
-    This is useful for verifying API credentials and retrieving org_id.
+    Performs a Layer 7 handshake with the Mist Cloud to validate authentication
+    and resolve organization identity.
+
+    This endpoint calls the Mist API `/api/v1/self` to retrieve the authenticated
+    user and organization details. If `org_id` is not provided, it will be
+    extracted from the last org-scoped privilege in the response.
+
+    Use this endpoint to verify API credentials before proceeding with provisioning.
     """
     engine = MistEngine(host=request.api_host)
     result = await engine.get_self()
