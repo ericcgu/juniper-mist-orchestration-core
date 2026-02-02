@@ -1,10 +1,10 @@
-# 🚀 juniper-mist-orchestration-core
+# eg-mist-orchestration-core
 
 > **The Blueprint for AI-Native Network Automation.**
 >
 > *A Distinguished Engineer's reference architecture for bridging Network Design, Intent-Based Networking (IBN), and AI-Driven Operations.*
 
-[![CI Status](https://github.com/ericcgu/juniper-mist-orchestration-core/actions/workflows/ci.yml/badge.svg)](https://github.com/ericcgu/juniper-mist-orchestration-core/actions)
+[![CI Status](https://github.com/ericcgu/eg-mist-orchestration-core/actions/workflows/ci.yml/badge.svg)](https://github.com/ericcgu/eg-mist-orchestration-core/actions)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-312/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688.svg)](https://fastapi.tiangolo.com)
 [![Redis](https://img.shields.io/badge/Redis-8.0-DC382D.svg)](https://redis.io)
@@ -13,35 +13,35 @@
 
 ---
 
-## 💼 Executive Summary
+## Executive Summary
 
-**`juniper-mist-orchestration-core`** is a masterclass in Domain-Driven Design & Intent-Based Networking for the AI-Driven Enterprise.
+**`eg-mist-orchestration-core`** is a masterclass in Domain-Driven Design & Intent-Based Networking for the AI-Driven Enterprise.
 
 This project demonstrates the evolution of network infrastructure from fragile, device-by-device configuration to robust, **AI-Native Software Engineering**. It eliminates "snowflake" configurations by implementing a strictly **idempotent**, **microservices-based** architecture that orchestrates the full lifecycle—from **Day 0 Identity** to **Day 2 Assurance**.
 
 By treating the network as a distributed software system, this framework bridges the gap between **Network Design** (The "What") and **Software Architecture** (The "How").
 
-### ✅ Standards Alignment
+### Standards Alignment
 
 This architecture is designed in strict alignment with **Juniper's Device Life-Cycle Management (LCM)** standards. It utilizes official Mist primitives (**Site Variables**, **Activation Codes**, **SLEs**) ensuring forward compatibility and enterprise supportability.
 
 ---
 
-## 🏗 The Architecture: "The 3-Day Lifecycle"
+## The Architecture: "The 3-Day Lifecycle"
 
 This core orchestrator is organized into three distinct domains, mirroring the modern Infrastructure-as-Code (IaC) lifecycle.
 
-### 🌅 Module 1: Day 0 — Genesis: Identity & Topology
+### Module 1: Day 0 — Genesis: Identity & Topology
 
 **"The Genesis Layer"**
 
 Before policies or assurance can exist, we must establish the **Identity** of the Organization and the **Topology** of the network. We use "Digital Twin" principles to build the network virtually before hardware arrives.
 
-### 🏛 The Six Domains of Genesis
+### The Six Domains of Genesis
 
 We define six distinct, isolated domains. In the architecture, these exist as separate Service Classes.
 
-## 🌅 Module 1: Day 0 — Genesis: The Federation of Truths
+## Module 1: Day 0 — Genesis: The Federation of Truths
 
 **"The Genesis Layer"**
 
@@ -74,7 +74,7 @@ We do not rely on a single monolithic "Source of Truth." Instead, we orchestrate
     * **Role:** Physical Binding.
     * **Action:** Utilizes **Mist Activation Codes** to bulk-claim hardware. It binds the specific serial numbers to the **Site Digital Twin**, enabling Zero-Touch Provisioning (ZTP).
 
-### 📜 Module 2: Day 1 — Intent & Policy
+### Module 2: Day 1 — Intent & Policy
 
 **"The Intent Layer"**
 
@@ -86,7 +86,7 @@ The architecture separates the **"What"** (Templates/Intent) from the **"Where"*
 * **Site Variables (The Secret Sauce):** We do not hardcode VLANs. We use Mist Variables (e.g., `{{guest_vlan}}`). The Orchestrator injects the unique values into the Site Shell during Day 0, while the Day 1 Template references the abstract variable.
 * **Late Binding:** Configurations are not hard-coded to devices. We map **Templates** to **Site Groups**. This allows us to re-architect an entire region's policy by changing a single UUID reference in the API.
 
-### 🔄 Module 3: Day 2 — Operations & Lifecycle
+### Module 3: Day 2 — Operations & Lifecycle
 
 **"The Closed Loop"**
 
@@ -97,7 +97,7 @@ The deployment is not finished until the **User Experience** is validated. We sp
 
 ---
 
-## 🛠 Technology Stack
+## Technology Stack
 
 | Technology | Purpose | Version |
 |------------|---------|---------|
@@ -114,7 +114,7 @@ The deployment is not finished until the **User Experience** is validated. We sp
 
 ---
 
-## 🔄 The Workflow API
+## The Workflow API
 
 | Step | Endpoint | Domain | Action |
 | :--- | :--- | :--- | :--- |
@@ -127,7 +127,7 @@ The deployment is not finished until the **User Experience** is validated. We sp
 
 ---
 
-## 🔄 The 13-Step Workflow
+## The 13-Step Workflow
 
 The orchestrator executes these steps in precise dependency order:
 
@@ -135,32 +135,32 @@ The orchestrator executes these steps in precise dependency order:
 
 ```mermaid
 flowchart TB
-    subgraph DAY0["☀️ Day 0: Infrastructure Provisioning"]
-        S1["1️⃣ Create Site<br/>+ IP Plan"]
-        S2["2️⃣ Assign Devices"]
+    subgraph DAY0["Day 0: Infrastructure Provisioning"]
+        S1["1. Create Site<br/>+ IP Plan"]
+        S2["2. Assign Devices"]
         S1 --> S2
     end
 
-    subgraph DAY1_WAN["🌐 Day 1: WAN Layer"]
-        S3["3️⃣ Create Applications"]
-        S5["5️⃣ Hub Profiles"]
-        S6["6️⃣ Gateway Templates"]
+    subgraph DAY1_WAN["Day 1: WAN Layer"]
+        S3["3. Create Applications"]
+        S5["5. Hub Profiles"]
+        S6["6. Gateway Templates"]
         S3 --> S5 --> S6
     end
 
-    subgraph DAY1_WIRED["🔌 Day 1: Wired Layer"]
-        S4["4️⃣ LAN Networks"]
-        S7["7️⃣ Switch Templates"]
+    subgraph DAY1_WIRED["Day 1: Wired Layer"]
+        S4["4. LAN Networks"]
+        S7["7. Switch Templates"]
         S4 --> S7
     end
 
-    subgraph DAY1_WIRELESS["📡 Day 1: Wireless Layer"]
-        S8["8️⃣ WLAN Templates"]
-        S9["9️⃣ RF Templates"]
-        S10["🔟 Create WLANs"]
-        S11["1️⃣1️⃣ Create Labels"]
-        S12["1️⃣2️⃣ WLAN Policies"]
-        S13["1️⃣3️⃣ Org PSKs"]
+    subgraph DAY1_WIRELESS["Day 1: Wireless Layer"]
+        S8["8. WLAN Templates"]
+        S9["9. RF Templates"]
+        S10["10. Create WLANs"]
+        S11["11. Create Labels"]
+        S12["12. WLAN Policies"]
+        S13["13. Org PSKs"]
         S8 --> S9 --> S10 --> S11 --> S12 --> S13
     end
 
@@ -175,9 +175,15 @@ flowchart TB
 
 ---
 
-## 👤 Author
+## Author
 
 **Eric Gu**
 
 - GitHub: [@ericcgu](https://github.com/ericcgu)
 - LinkedIn: [Connect with me](https://linkedin.com/in/ericcgu)
+
+---
+
+## Disclaimer
+
+This project is an independent open-source tool and is not affiliated with, sponsored by, or endorsed by Juniper Networks, Inc. "Juniper" and "Mist" are trademarks of Juniper Networks, Inc.
