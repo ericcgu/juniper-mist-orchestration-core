@@ -37,9 +37,42 @@ This core orchestrator is organized into three distinct domains, mirroring the m
 
 Before policies or assurance can exist, we must establish the **Identity** of the Organization and the **Topology** of the network. We use "Digital Twin" principles to build the network virtually before hardware arrives.
 
-* **Control Plane Identity:** A "Reachability Probe" (`GET /org/self`) validates the API Token, Cloud Context, and `Superuser` write privileges before execution.
-* **Algorithmic Topology:** Manual IP spreadsheets are replaced by a `NetworkCalculator` service that mathematically carves a `/8` Supernet into 8 geographic Zones (using `/11` blocks).
-* **Supply Chain Identity (ZTP):** We utilize Mist **Activation Codes** to bulk-claim hardware. The "Identity" of the device is bound to the "Topology" of the site *before* the device is physically installed, enabling true Zero-Touch Provisioning.
+### 🏛 The Six Domains of Genesis
+
+We define six distinct, isolated domains. In the architecture, these exist as separate Service Classes.
+
+## 🌅 Module 1: Day 0 — Genesis: The Federation of Truths
+
+**"The Genesis Layer"**
+
+We do not rely on a single monolithic "Source of Truth." Instead, we orchestrate a federation of specialized domains. The Orchestrator acts as the diplomat between the **IPAM** (Address Truth), the **NMS** (Intent Truth), and the **Inventory** (Hardware Truth).
+
+* **1. Mist Connection Service (The Handshake)**
+    * **Role:** Connectivity & Authentication.
+    * **Action:** This is a pure API validation layer. It runs a "Reachability Probe" (`GET /org/self`) to verify the API Token is valid and the cloud is accessible. 
+
+* **2. IPAM: IP Asset Management: Algorithmic IP Planning Service (The Address Broker)**
+    * **Role:** Dynamic IP Planning & Geo-Zoning.
+    * **Action:** We replace manual spreadsheets with code. This service acts as a dedicated Layer 3 engine that mathematically carves the `/8` Supernet into **8 Geographic Zones** (using `/11` blocks). It deterministically assigns subnets based on the Region Code, eliminating human error and overlap.
+    * **Outcome:** It handles the specific **IP Allocation** required for the site resources.
+
+* **3. NMS Service (The Reference Integrator)**
+    * **Role:** External Reference Data Aggregation.
+    * **Action:** Serves as the integration point for all golden network reference data stored **outside of Mist** to define *how* the site is constructed. It is grouped by:
+        * **Physical Intent:** Defines the hardware hierarchy (Routers $\rightarrow$ Switches $\rightarrow$ Access Points).
+
+* **4. Site Service (The Digital Twin)**
+    * **Role:** The Location Identity.
+    * **Action:** Creates the specific **"Digital Twin"** of the physical real estate. It establishes the site's unique identity—its physical address, time zone, and geo-coordinates—and acts as the **Location Container** where the global NMS policies (Intent) meet the specific hardware (Inventory).
+    * **Example:** *Creating `NYC-Penn-Station` as a site object with Timezone `America/New_York` and Address `4 Pennsylvania Plaza`, ready to receive the "Retail Template" policies.*
+
+* **5. Applications (Traffic Registry)**
+    * **Role:** Application Signatures.
+    * **Action:** Defines global "Interesting Traffic" signatures (e.g., Zoom, O365, Salesforce, Workday) to ensure traffic classes are consistent across all sites.
+
+* **6. Inventory (Supply Chain)**
+    * **Role:** Physical Binding.
+    * **Action:** Utilizes **Mist Activation Codes** to bulk-claim hardware. It binds the specific serial numbers to the **Site Digital Twin**, enabling Zero-Touch Provisioning (ZTP).
 
 ### 📜 Module 2: Day 1 — Intent & Policy
 
