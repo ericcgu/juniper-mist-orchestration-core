@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter, Depends
 from fastapi.responses import RedirectResponse
 from src.config import Settings, get_settings
-from src.routers.day0_design_and_topology import org, nms, sites
+from src.routers.day0_design_and_topology import org, nms, sites, apps, inventory
 
 # OpenAPI tag definitions for Swagger UI grouping.
 tags_metadata = [
@@ -14,8 +14,16 @@ tags_metadata = [
         "description": "Network management system configuration. Stores device MACs, VLANs, and switch management details.",
     },
     {
-        "name": "day 0 - site provisioning",
+        "name": "Sites - Day 0",
         "description": "Orchestrates the lifecycle (CRUD) of physical site objects and site variables within the Mist org.",
+    },
+    {
+        "name": "Applications - Day 0",
+        "description": "Global application signatures for traffic classification and AppQoE steering.",
+    },
+    {
+        "name": "Inventory - Day 0",
+        "description": "Device claim and assignment operations for Zero Touch Provisioning.",
     },
     {
         "name": "system",
@@ -48,6 +56,8 @@ app.include_router(status_router)
 app.include_router(org.router)
 app.include_router(nms.router)
 app.include_router(sites.router)
+app.include_router(apps.router)
+app.include_router(inventory.router)
 
 @app.get("/", include_in_schema=False)
 def redirect_to_docs():

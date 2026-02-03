@@ -112,10 +112,36 @@ The deployment is not finished until the **User Experience** is validated. Day 2
 - Queries **Service Level Expectations (SLEs)** to verify metrics like "Time to Connect," "Throughput," and "Roaming Efficacy"
 - If SLE is <90%, the deployment is marked as **Failed**
 
+
+
 **Lifecycle (Write)**
 - Automates "Day N" mutations safely
 - Implements **Canary Firmware Upgrades** (upgrade 1 AP → measure SLEs → upgrade site)
 - Handles automated PSK rotation
+
+---
+
+## App Directory Structure: Routers
+
+```
+/routers
+├── admin.py               # Day 0: Reachability & Org Context
+├── topology.py            # Day 0: Site Creation & IP Calc
+├── inventory.py           # Day 0: ZTP & Supply Chain
+│
+└── day1/                  # Day 1: Intent & Policy Domains
+    ├── 0_routing_wan/
+    │   ├── edge_templates.py    # Router "Class" Definitions
+    │   └── traffic_steering.py  # "Zoom -> MPLS" Logic
+    │
+    ├── 1_wired_switching/
+    │   ├── switch_templates.py  # Switch "Class" Definitions
+    │   └── port_profiles.py     # "Colorless Ports" Logic
+    │
+    └── 2_wireless_mobility/
+        ├── wlan_intents.py      # SSID & Security Logic
+        └── rf_optimization.py   # RRM & Physics Profiles
+```
 
 ---
 

@@ -2,6 +2,16 @@ import redis
 from src.config import get_settings
 
 
+# =============================================================================
+# Redis Key Constants
+# =============================================================================
+
+class RedisKeys:
+    """Centralized Redis key definitions."""
+    API_HOST = "api_host"
+    ORG_ID = "org_id"
+
+
 class RedisClient:
     def __init__(self):
         settings = get_settings()
@@ -31,3 +41,27 @@ class RedisClient:
 def get_redis_client() -> RedisClient:
     """Get a Redis client instance."""
     return RedisClient()
+
+
+# =============================================================================
+# Context Accessors
+# =============================================================================
+
+def get_api_host() -> str | None:
+    """Get the stored API host."""
+    return get_redis_client().get(RedisKeys.API_HOST)
+
+
+def get_org_id() -> str | None:
+    """Get the stored organization ID."""
+    return get_redis_client().get(RedisKeys.ORG_ID)
+
+
+def set_api_host(value: str) -> bool:
+    """Store the API host."""
+    return get_redis_client().set(RedisKeys.API_HOST, value)
+
+
+def set_org_id(value: str) -> bool:
+    """Store the organization ID."""
+    return get_redis_client().set(RedisKeys.ORG_ID, value)
